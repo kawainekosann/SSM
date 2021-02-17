@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context  http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/tx  http://www.springframework.org/schema/tx/spring-tx.xsd
+       http://www.springframework.org/schema/aop  http://www.springframework.org/schema/aop/spring-aop.xsd
+">
+
+    <context:property-placeholder location="classpath:jdbc.properties"></context:property-placeholder>
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
+        <property name="driverClassName" value="${jdbc.driver}"></property>
+        <property name="url" value="${jdbc.url}"></property>
+        <property name="username" value="${jdbc.username}"></property>
+        <property name="password" value="${jdbc.password}"></property>
+    </bean>
+
+    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource" ref="dataSource"></property>
+    </bean>
+
+
+    <context:component-scan base-package="com.kawainekosann"></context:component-scan>
+
+        <!--<bean id="accountDao" class="com.kawainekosann.dao.AccountDaoImpl">
+            <property name="jdbcTemplate" ref="jdbcTemplate"></property>
+        </bean>
+        &lt;!&ndash;目标对象 内部方法就是切点&ndash;&gt;
+        <bean id="accountService" class="com.kawainekosann.service.AccountServiceImpl">
+            <property name="accountDao" ref="accountDao"></property>
+        </bean>-->
+
+    <!--配置平台事务管理器-->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+    <!--使用注解时要添加，事务的注解驱动-->
+    <tx:annotation-driven transaction-manager="transactionManager"></tx:annotation-driven>
+
+    <!--通知 事务的管理 tx-->
+    <!--<tx:advice id="txAdvice" transaction-manager="transactionManager">
+        &lt;!&ndash;设置事务的属性信息 name:切点方法名称这里是service方法名称
+        isolation:事务隔离级别
+        propagation:事务传播行为
+        timeout:超时时间
+        read-only:是否只读&ndash;&gt;
+        <tx:attributes>
+            <tx:method name="transfer" isolation="DEFAULT" propagation="REQUIRED" read-only="false"></tx:method>
+            <tx:method name="*" isolation="DEFAULT" propagation="REQUIRED" timeout="-1" read-only="false"/>
+        </tx:attributes>
+    </tx:advice>
+    &lt;!&ndash;配置事务AOP织入&ndash;&gt;
+    <aop:config>
+        &lt;!&ndash;事务增强advisor&ndash;&gt;
+        <aop:advisor advice-ref="txAdvice"
+                     pointcut="execution(* com.kawainekosann.service.AccountServiceImpl.*(..))"></aop:advisor>
+    </aop:config>-->
+</beans>
