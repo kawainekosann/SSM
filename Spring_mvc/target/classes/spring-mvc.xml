@@ -32,7 +32,7 @@
         </property>
     </bean>-->
     <!--mvc的注解驱动-->
-    <mvc:annotation-driven ></mvc:annotation-driven>
+    <mvc:annotation-driven conversion-service="conversionService"></mvc:annotation-driven>
 
     <!--mvc开发资源的访问，/** 匹配目录及其子目录，这里是js目录不会被web.xml里配置的DispatcherServlet匹配到对应的映射中-->
     <!--<mvc:resources mapping="/js/**" location="/js/"></mvc:resources>-->
@@ -48,4 +48,38 @@
         </property>
     </bean>
 
+    <!--配置文件上传解析器-->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="defaultEncoding" value="UTF-8"></property>
+        <property name="maxUploadSize" value="500000"></property>
+    </bean>
+
+    <!--配置拦截器-->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <!--对哪些资源执行拦截操作-->
+            <mvc:mapping path="/target"/>
+            <bean class="com.kawainekosann.interseptor.MyIntersepetor"/>
+        </mvc:interceptor>
+        <mvc:interceptor>
+            <!--对哪些资源执行拦截操作-->
+            <mvc:mapping path="/target"/>
+            <bean class="com.kawainekosann.interseptor.MyIntersepetor2"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
+
+    <!--配置异常处理器-->
+    <!--<bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+        &lt;!&ndash;内部资源视图解析器已经配置 前缀 后缀&ndash;&gt;
+        <property name="defaultErrorView" value="error1"></property>
+        &lt;!&ndash;先匹配下面的异常，匹配不到使用上面的默认的配置&ndash;&gt;
+        <property name="exceptionMappings">
+            <map>
+                <entry key="java.lang.ArithmeticException" value="error2"></entry>
+            </map>
+        </property>
+    </bean>-->
+
+    <!--自定义异常处理器-->
+    <bean class="com.kawainekosann.resolver.MyResolver"/>
 </beans>

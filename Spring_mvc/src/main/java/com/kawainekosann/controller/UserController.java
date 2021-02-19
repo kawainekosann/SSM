@@ -8,11 +8,14 @@ import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Date;
@@ -162,5 +165,40 @@ public class UserController {
     //SpringMVC自动将注入User对应的属性
     public void save18(Date date){
         System.out.println(date);
+    }
+
+    @RequestMapping("/quick19")
+    @ResponseBody //代表不进行页面跳转
+    //SpringMVC自动将注入User对应的属性
+    public void save19(HttpServletRequest request, HttpServletResponse response, HttpSession session){
+        System.out.println(request);
+        System.out.println(response);
+        System.out.println(session);
+    }
+
+    @RequestMapping("/quick20")
+    @ResponseBody //代表不进行页面跳转
+    //SpringMVC自动将注入User对应的属性
+    public void save20(@RequestHeader(value = "User-agent",required = false)  String user_agent){
+        System.out.println(user_agent);
+    }
+
+    @RequestMapping("/quick21")
+    @ResponseBody //代表不进行页面跳转
+    //SpringMVC自动将注入User对应的属性
+    public void save21(@CookieValue(value = "JSESSIONID",required = false)  String jsessionId){
+        System.out.println(jsessionId);
+    }
+
+    @RequestMapping("/quick22")
+    @ResponseBody
+    public void save22(String userName, MultipartFile uploadFile,MultipartFile uploadFile2) throws IOException {
+        System.out.println(userName);
+        //获得上传文件的名称
+        String originalFilename = uploadFile.getOriginalFilename();
+        uploadFile.transferTo(new File("C:\\Users\\LIUQI\\Desktop\\test\\upload\\"+originalFilename));
+
+        String originalFilename2 = uploadFile2.getOriginalFilename();
+        uploadFile2.transferTo(new File("C:\\Users\\LIUQI\\Desktop\\test\\upload\\"+originalFilename2));
     }
 }
