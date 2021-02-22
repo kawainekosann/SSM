@@ -7,6 +7,9 @@
     <select id="findAll" resultType="user">
         select * from user
     </select>
+    <select id="findById" resultType="user" parameterType="int">
+        select * from user where id=#{id}
+    </select>
     <!--插入操作-->
     <insert id="save" parameterType="com.kawainekosann.domain.User">
         insert into user values(#{id},#{userName},#{passWord})
