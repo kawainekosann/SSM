@@ -17,8 +17,12 @@ public class UserDaoImpl implements UserDao {
         InputStream inputStream = Resources.getResourceAsStream("sqlMapConfig.xml");
         SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
         SqlSession sqlSession = sqlSessionFactory.openSession();
-        List<User> userList= Collections.singletonList((User) sqlSession.selectList("userMapper.findAll"));
+        List<User> userList= sqlSession.selectList("userMapper.findAll");
         return userList;
 
+    }
+
+    public User findById(int id) {
+        return null;
     }
 }

@@ -2,8 +2,18 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="userMapper">
+<!--1.Mapper.xml文件中的namespace与mapper接口的全限定名相同。-->
+<mapper namespace="com.kawainekosann.dao.UserDao">
+    <!--Mapper接口方法名和Mapper.xml中定义的每个statement的id相同-->
+    <!--Mapper接口方法的输出参数类型和mapper.xml中定义的每个sql的resultType的类型相同-->
     <select id="findAll" resultType="user">
-        select * from user
+        select * from public.user
+    </select>
+
+
+    <!--根据id进行查询-->
+    <!--Mapper接口方法的输入参数类型和mapper.xml中定义的每个sql的parameterType的类型相同-->
+    <select id="findById" parameterType="int" resultType="user">
+        select * from public.user where  public.user.id = #{ID}
     </select>
 </mapper>

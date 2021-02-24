@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--1.Mapper.xml文件中的namespace与mapper接口的全限定名相同。-->
+
+<mapper namespace="com.kawainekosann.mapper.UserMapper">
+    <!--sql语句的抽取-->
+    <sql id="selectUser">select * from public.user</sql>
+
+    <!--Mapper接口方法名和Mapper.xml中定义的每个statement的id相同-->
+    <!--Mapper接口方法的输出参数类型和mapper.xml中定义的每个sql的resultType的类型相同-->
+    <!--Mapper接口方法的输入参数类型和mapper.xml中定义的每个sql的parameterType的类型相同-->
+    <select id="findByCondition" resultType="user" parameterType="user">
+        <include refid="selectUser"></include>
+        <where>
+            <if test="id!=0">
+                and id = #{id}
+            </if>
+            <if test="userName!=null">
+                and "userName"=#{userName}
+            </if>
+        </where>
+    </select>
+    <!--foreach collection list是集合 array传数组
+    open:sql以什么为开始 close:sql以什么为结束 item：集合里的每一项
+    separator：以什么符号为分隔符-->
+    <select id="findByIds" parameterType="list" resultType="user">
+        <include refid="selectUser"></include>
+        <where>
+            <foreach collection="list" open="id in(" close=")" item="id" separator=",">
+                #{id}
+            </foreach>
+        </where>
+    </select>
+</mapper>
