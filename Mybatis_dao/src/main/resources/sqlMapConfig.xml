@@ -7,6 +7,12 @@
     <typeAliases>
         <typeAlias type="com.kawainekosann.domain.User" alias="user"/>
     </typeAliases>
+
+    <!--注册自定义类型处理器-->
+    <typeHandlers>
+        <typeHandler handler="com.kawainekosann.handler.DateTypeHandler"></typeHandler>
+    </typeHandlers>
+
     <environments default="development">
         <environment id="development">
             <transactionManager type="JDBC"></transactionManager>

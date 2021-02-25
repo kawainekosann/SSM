@@ -33,4 +33,8 @@
             </foreach>
         </where>
     </select>
+
+    <insert id="save" parameterType="user">
+        insert into public.user values (#{id},#{userName},#{passWord},#{birthday})
+    </insert>
 </mapper>

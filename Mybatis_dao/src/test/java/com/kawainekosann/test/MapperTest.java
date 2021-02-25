@@ -11,6 +11,7 @@ import org.junit.Test;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class MapperTest {
@@ -21,17 +22,23 @@ public class MapperTest {
         SqlSession sqlSession = new SqlSessionFactoryBuilder().build(resourceAsStream).openSession();
         UserMapper mapper = sqlSession.getMapper(UserMapper.class);
         User userCondition = new User();
-        userCondition.setId(1);
+        userCondition.setId(3);
         //userCondition.setUserName("liuqi1");
         List<User> userList = mapper.findByCondition(userCondition);
         System.out.println(userList);
-        logger.info(userList);
 
-        List<Integer> list = new ArrayList<Integer>();
+        /*List<Integer> list = new ArrayList<Integer>();
         list.add(1);
         list.add(2);
         List<User> userList2 = mapper.findByIds(list);
         System.out.println(userList2);
 
+        User user = new User();
+        user.setId(3);
+        user.setUserName("liuqi3");
+        user.setPassWord("3liuqi");
+        user.setBirthday(new Date());
+        mapper.save(user);
+        sqlSession.commit();*/
     }
 }
