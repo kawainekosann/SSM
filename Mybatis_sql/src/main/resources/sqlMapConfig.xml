@@ -6,19 +6,12 @@
     <properties resource="jdbc.properties"/>
     <typeAliases>
         <typeAlias type="com.kawainekosann.domain.User" alias="user"/>
+        <typeAlias type="com.kawainekosann.domain.Orders" alias="order"/>
     </typeAliases>
 
-    <!--注册自定义类型处理器-->
     <typeHandlers>
         <typeHandler handler="com.kawainekosann.handler.DateTypeHandler"></typeHandler>
     </typeHandlers>
-
-    <!--配置分页助手插件-->
-    <plugins>
-        <plugin interceptor="com.github.pagehelper.PageHelper">
-            <property name="dialect" value="postgresql"/>
-        </plugin>
-    </plugins>
 
     <environments default="development">
         <environment id="development">
@@ -33,7 +26,7 @@
         </environment>
     </environments>
     <mappers>
-        <mapper resource="com.kawainekosann.mapper\UserMapper.xml"></mapper>
-        <mapper resource="com.kawainekosann.mapper\UserMapperNew.xml"/>
+        <mapper resource="com.kawainekosann.mapper\UserMapper.xml"/>
+        <mapper resource="com.kawainekosann.mapper\OrderMapper.xml"/>
     </mappers>
 </configuration>

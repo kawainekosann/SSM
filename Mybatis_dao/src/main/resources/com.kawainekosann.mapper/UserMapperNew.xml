@@ -37,4 +37,8 @@
     <insert id="save" parameterType="user">
         insert into public.user values (#{id},#{userName},#{passWord},#{birthday})
     </insert>
+    
+    <select id="findAll" resultType="user">
+        select * from public.user
+    </select>
 </mapper>

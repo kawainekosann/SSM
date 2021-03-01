@@ -5,9 +5,8 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.kawainekosann</groupId>
-    <artifactId>Mybatis_dao</artifactId>
+    <artifactId>Mybatis_sql</artifactId>
     <version>1.0-SNAPSHOT</version>
-
     <dependencies>
         <dependency>
             <groupId>postgresql</groupId>
@@ -45,6 +44,7 @@
             <artifactId>jsqlparser</artifactId>
             <version>1.4</version>
         </dependency>
+
     </dependencies>
 
 </project>

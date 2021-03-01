@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--1.Mapper.xml文件中的namespace与mapper接口的全限定名相同。-->
+<mapper namespace="com.kawainekosann.mapper.OrderMapper">
+    <!--此处 order为sqlMapConfig 定义的别名-->
+    <resultMap id="orderMap" type="order">
+        <!--手动指定字段和实体熟悉的关系-->
+        <!--主键有个单独标签
+        column：字段名称
+        property:实体属性名称
+        -->
+        <id column="oid" property="id"></id>
+        <result column="ordertimes" property="ordertimes"></result>
+        <result column="total" property="total"></result>
+       <!-- <result column="uid" property="user.id"></result>
+        <result column="userName" property="user.userName"></result>
+        <result column="passWord" property="user.passWord"></result>
+        <result column="birthday" property="user.birthday"></result>-->
+        <!--匹配
+        property:当前实体的属性名称
+        javaType：当前属性的类型
+        -->
+        <association property="user" javaType="user">
+            <id column="uid" property="id"></id>
+            <result column="userName" property="userName"></result>
+            <result column="passWord" property="passWord"></result>
+            <result column="birthday" property="birthday"></result>
+        </association>
+    </resultMap>
+
+    <select id="findAll" resultMap="orderMap">
+     SELECT *,o."id" oid FROM orders o ,"user" u where o."id"=u."id"
+    </select>
+</mapper>
