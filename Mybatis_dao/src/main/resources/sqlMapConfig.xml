@@ -13,10 +13,12 @@
         <typeHandler handler="com.kawainekosann.handler.DateTypeHandler"></typeHandler>
     </typeHandlers>
 
-    <!--配置分页助手插件-->
+    <!--配置分页助手插件
+    <property name="dialect" value="postgresql"/>
+    -->
     <plugins>
         <plugin interceptor="com.github.pagehelper.PageHelper">
-            <property name="dialect" value="postgresql"/>
+            <property name="dialect" value="mysql"/>
         </plugin>
     </plugins>
 
@@ -33,7 +35,8 @@
         </environment>
     </environments>
     <mappers>
-        <mapper resource="com.kawainekosann.mapper\UserMapper.xml"></mapper>
-        <mapper resource="com.kawainekosann.mapper\UserMapperNew.xml"/>
+        <!--<mapper resource="com.kawainekosann.mapper\UserMapper.xml"></mapper>
+        <mapper resource="com.kawainekosann.mapper\UserMapperNew.xml"/>-->
+        <mapper resource="com.kawainekosann.mapper/UserMapperNew.xml"/>
     </mappers>
 </configuration>
