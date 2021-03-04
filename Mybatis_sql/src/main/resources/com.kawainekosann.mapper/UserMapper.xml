@@ -12,15 +12,48 @@
         <result column="birthday" property="birthday"></result>
         <!--配置集合
         property:当前实体的属性名称
-        javaType：当前属性的类型
+        javaType:这里是集合
+        ofType：当前属性的类型
         -->
-        <collection property="ordersList" javaType="order">
+        <collection property="ordersList" javaType="java.util.ArrayList" ofType="order">
             <id column="oid" property="id"></id>
             <result column="total" property="total"></result>
             <result column="ordertimes" property="ordertimes"></result>
         </collection>
     </resultMap>
+
+    <resultMap id="userMsg" type="user">
+        <id column="id" property="id"></id>
+        <result column="userName" property="userName"></result>
+        <result column="passWord" property="passWord"></result>
+        <result column="birthday" property="birthday"></result>
+        <collection property="messages" javaType="java.util.ArrayList" ofType="message">
+            <id column="mid" property="id"></id>
+            <result column="title" property="title"></result>
+            <result column="content" property="content"></result>
+            <result column="uid" property="uid"></result>
+        </collection>
+    </resultMap>
     <select id="findAll" resultMap="userMap">
         select *,o.id oid from public.user u,orders o where u."id" = o.uid
+    </select>
+
+    <select id="findAllMsg" resultMap="userMsg">
+        SELECT *,m.id mid FROM public."user" u,public.message m where u.id = m.uid
+    </select>
+    <!--################################################################################################-->
+    <resultMap id="userRoleMap" type="user">
+        <id column="userid" property="id"></id>
+        <result column="userName" property="userName"></result>
+        <result column="passWord" property="passWord"></result>
+        <result column="birthday" property="birthday"></result>
+        <collection property="roleList" ofType="role">
+            <id column="roleid" property="id"></id>
+            <result column="rolename" property="rolename"></result>
+            <result column="roledesc" property="roledesc"/>
+        </collection>
+    </resultMap>
+    <select id="findUserAndRole" resultMap="userRoleMap">
+        SELECT * FROM "user" u,sys_user_role ur, sys_role r WHERE u.id=ur.userid and ur.roleid = r."id"
     </select>
 </mapper>

@@ -10,6 +10,25 @@ public class User {
     private Date birthday;
     //描述当前用户存在哪些订单
     private List<Orders> ordersList;
+    private  List<Message> messages;
+    //描述当前用户有哪些角色
+    private List<Role> roleList;
+
+    public List<Role> getRoleList() {
+        return roleList;
+    }
+
+    public void setRoleList(List<Role> roleList) {
+        this.roleList = roleList;
+    }
+
+    public List<Message> getMessages() {
+        return messages;
+    }
+
+    public void setMessages(List<Message> messages) {
+        this.messages = messages;
+    }
 
     public int getId() {
         return id;
@@ -59,6 +78,8 @@ public class User {
                 ", passWord='" + passWord + '\'' +
                 ", birthday=" + birthday +
                 ", ordersList=" + ordersList +
+                ", messages=" + messages +
+                ", roleList=" + roleList +
                 '}';
     }
 }

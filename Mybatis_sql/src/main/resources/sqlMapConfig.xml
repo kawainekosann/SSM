@@ -7,6 +7,8 @@
     <typeAliases>
         <typeAlias type="com.kawainekosann.domain.User" alias="user"/>
         <typeAlias type="com.kawainekosann.domain.Orders" alias="order"/>
+        <typeAlias type="com.kawainekosann.domain.Message" alias="message"/>
+        <typeAlias type="com.kawainekosann.domain.Role" alias="role"/>
     </typeAliases>
 
     <typeHandlers>
@@ -25,8 +27,15 @@
             </dataSource>
         </environment>
     </environments>
-    <mappers>
+<!--    <mappers>
         <mapper resource="com.kawainekosann.mapper\UserMapper.xml"/>
         <mapper resource="com.kawainekosann.mapper\OrderMapper.xml"/>
+    </mappers>-->
+
+    <!--加载映射关系 TODO  -->
+    <mappers>
+        <!--指定接口所在的包-->
+        <package name="com.kawainekosann.mapper"/>
     </mappers>
+
 </configuration>
