@@ -1,0 +1,15 @@
+server:
+  port: 8084
+
+person:
+  lastName: hello${random.uuid}
+  age: ${random.int}
+  boss: false
+  birth: 2017/12/12
+  maps: {k1: v1,k2: 12}
+  lists:
+    - lisi
+    - zhaoliu
+  dog:
+    name: ${person.hello:hello}_dog
+    age: 12

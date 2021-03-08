@@ -1,0 +1,84 @@
+#server:
+#  port: 8082
+#
+#person:
+#  lastName: hello${random.uuid}
+#  age: ${random.int}
+#  boss: false
+#  birth: 2017/12/12
+#  maps: {k1: v1,k2: 12}
+#  lists:
+#    - lisi
+#    - zhaoliu
+#  dog:
+#    name: ${person.hello:hello}_dog
+#    age: 12
+#
+#spring:
+#  profiles:
+#    active: product
+
+spring:
+  profiles:
+    active: default
+---
+server:
+  port: 8082
+spring:
+  config:
+    activate:
+      on-profile: default
+
+person:
+  lastName: hello${random.uuid}
+  age: ${random.int}
+  boss: false
+  birth: 2017/12/12
+  maps: {k1: v1,k2: 12}
+  lists:
+    - lisi
+    - zhaoliu
+  dog:
+    name: ${person.hello:hello}_dog
+    age: 12
+---
+server:
+  port: 8083
+spring:
+  config:
+    activate:
+      on-profile: dev
+
+person:
+  lastName: hello${random.uuid}
+  age: ${random.int}
+  boss: false
+  birth: 2017/12/12
+  maps: {k1: v1,k2: 12}
+  lists:
+    - lisi
+    - zhaoliu
+  dog:
+    name: ${person.hello:hello}_dog
+    age: 12
+---
+
+server:
+  port: 8084
+spring:
+  config:
+    activate:
+      on-profile: prod
+
+person:
+  lastName: hello${random.uuid}
+  age: ${random.int}
+  boss: false
+  birth: 2017/12/12
+  maps: {k1: v1,k2: 12}
+  lists:
+    - lisi
+    - zhaoliu
+  dog:
+    name: ${person.hello:hello}_dog
+    age: 12
